@@ -1,6 +1,6 @@
 {
   "name": "dsh-labreport",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "基础物理实验报告自动生成：模板 + 指导书 + 书写要求 + 数据/图片 → 可编辑 Word 报告与 PDF（分步确认）",

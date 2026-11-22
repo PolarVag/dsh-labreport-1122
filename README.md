@@ -1,5 +1,8 @@
 # dsh-labreport 实验报告工坊
 
+[![ci](https://github.com/PolarVag/dsh-labreport-1122/actions/workflows/ci.yml/badge.svg)](https://github.com/PolarVag/dsh-labreport-1122/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 把「实验报告要求 PDF + 实验指导书 PDF + 实验数据/图片 + 报告头模板」变成一份可直接交的
 Word 报告（并在本机有 Word 时顺带导出 PDF）。排版细节（页边距 2 cm、宋体小四、行距 20 磅、
 三线表、表题在上图题在下、公式用 Word 原生 OMML、页脚「第 N 页」）都按书写要求写死在引擎里，
@@ -10,7 +13,7 @@ Word 报告（并在本机有 Word 时顺带导出 PDF）。排版细节（页�
 先把仓库 clone 到本机任意位置，然后在 DSH 里装成本地 bundle（安装即软链，改源码立即生效）：
 
 ```
-git clone https://github.com/<your-github-name>/dsh-labreport-1122.git
+git clone https://github.com/PolarVag/dsh-labreport-1122.git
 plugin_manager install_bundle  target=<clone 下来的绝对路径>
 ```
 

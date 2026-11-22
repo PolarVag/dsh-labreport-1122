@@ -22,7 +22,7 @@ python -m pip install numpy scipy matplotlib openpyxl
 
 ```powershell
 cd D:\
-git clone https://github.com/<your-github-name>/dsh-labreport-1122.git
+git clone https://github.com/PolarVag/dsh-labreport-1122.git
 ```
 
 没有 git 就下载 ZIP 解压，效果一样——插件读的是本地目录。
