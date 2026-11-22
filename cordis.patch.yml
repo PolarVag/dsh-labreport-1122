@@ -1,0 +1,10 @@
+# dsh-labreport bundle patch
+# 把 labreport 插件行插入 profile 的插件清单（config-tree 根即插件列表）。
+# host-only：包内没有 dsh.client 半部，浏览器侧不加载任何东西。
+#
+# 安装（工作区内的本地目录）：
+#   plugin_manager → action: install_bundle, target: <本目录绝对路径>
+# 安装后本地目录是软链，改源码即生效；替换已装包需要重启。
+- insert:
+    - id: labreport
+      name: 'dsh-labreport'

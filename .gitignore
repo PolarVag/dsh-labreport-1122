@@ -1,0 +1,48 @@
+# 依赖与构建产物
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+
+# 每个实验工程的中间产物与成品（体积大、且含个人数据）
+_lr/
+**/_lr/
+**/output/
+report-making/
+
+# 本地 Python 环境与 wheel 缓存
+_labreport/
+.venv/
+*.whl
+pip-*.log
+
+# 实验数据与个人材料：别提交
+*.docx
+*.doc
+*.pdf
+*.xlsx
+*.xls
+*.jpg
+*.jpeg
+*.png
+*.PNG
+*.vi
+*.lvproj
+*.aliases
+
+# 但仓库自己要用到的资源保留
+!docs/**/*.png
+!icon.svg
+!vendor/**
+!engine/tests/fixtures/**
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
