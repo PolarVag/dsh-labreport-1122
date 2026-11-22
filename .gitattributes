@@ -1,0 +1,15 @@
+# 统一换行，避免 Windows 上反复出现 CRLF 改动
+* text=auto eol=lf
+
+*.mjs text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+
+# 二进制/字体等不要当文本处理
+*.svg text eol=lf
+*.whl binary
+*.png binary
+*.ico binary
