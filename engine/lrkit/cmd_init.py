@@ -210,30 +210,32 @@ def meta_from_notes(folder: Path) -> tuple[dict, list[str], str]:
         text, _enc = read_text_auto(path)
         hit = 0
         for line in (text or "").splitlines():
-            m = _INFO_LINE.match(line)
-            if not m:
-                continue
-            key, value = m.group(1).strip(), m.group(2).strip()
-            if not value or len(value) > 60:
-                continue
-            if key in ("调课/补课", "调课补课", "调课"):
-                meta["experiment"]["makeUp"] = value not in ("否", "无", "false", "False", "0")
-                hit += 1
-                continue
-            target = _INFO_FIELDS.get(key)
-            if not target:
-                continue
-            group, field = target
-            if field == "date":
-                iso = _norm_date(value)
-                if not iso:
+            # 一行里常塞多组「键：值」，用中文/英文分号切开再逐段解析
+            for seg in re.split(r"[；;]", line):
+                m = _INFO_LINE.match(seg.strip())
+                if not m:
                     continue
-                value = iso
-            if meta[group].get(field):
-                continue
-            meta[group][field] = value
-            filled.append(f"{group}.{field}")
-            hit += 1
+                key, value = m.group(1).strip(), m.group(2).strip()
+                if not value or len(value) > 60:
+                    continue
+                if key in ("调课/补课", "调课补课", "调课"):
+                    meta["experiment"]["makeUp"] = value not in ("否", "无", "false", "False", "0")
+                    hit += 1
+                    continue
+                target = _INFO_FIELDS.get(key)
+                if not target:
+                    continue
+                group, field = target
+                if field == "date":
+                    iso = _norm_date(value)
+                    if not iso:
+                        continue
+                    value = iso
+                if meta[group].get(field):
+                    continue
+                meta[group][field] = value
+                filled.append(f"{group}.{field}")
+                hit += 1
         if hit and not used:
             used = path.name
     meta["experiment"].setdefault("short", meta["experiment"].get("name", ""))
