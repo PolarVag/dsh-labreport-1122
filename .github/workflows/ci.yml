@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    # 插件依赖 Windows（Word COM、PowerShell），测试本身跨平台但这里按目标平台跑
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: 安装引擎依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install python-docx lxml PyYAML pymupdf openpyxl
+
+      - name: JS 语法检查
+        run: |
+          node --check index.js
+          node --check config.js
+          node --check lib/run.js
+          node --check lib/paths.js
+          node --check lib/pdf.js
+          node --check lib/doc2docx.js
+
+      - name: Python 引擎单测
+        env:
+          PYTHONUTF8: '1'
+          PYTHONIOENCODING: utf-8
+        run: python -m unittest discover -s engine/tests -v
